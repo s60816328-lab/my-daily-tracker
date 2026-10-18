@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مرجعي اليومي | الرئيسية</title>
+    <!-- خطوط جوجل العربية العصرية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-pink: #ffb6c1;
+            --dark-pink: #e75480;
+            --soft-pink: #fbcce7;
+            --soft-bg: #fff0f5;
+            --card-bg: #ffffff;
+            --text-color: #4a3b4c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--soft-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+            background-image: radial-gradient(var(--primary-pink) 1.2px, transparent 1.2px);
+            background-size: 28px 28px;
+            overflow-x: hidden;
+        }
+
+        /* 🌸 شاشة التحميل (Loading Screen) */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff0f5;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loader-avatar-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 20px;
+        }
+
+        .loader-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--dark-pink);
+            box-shadow: 0 10px 25px rgba(231, 84, 128, 0.3);
+            animation: bounce 1.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-15px) scale(1.03); }
+        }
+
+        /* تساقط الورود الكرتونية */
+        .falling-flower {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(200px) rotate(360deg); opacity: 0; }
+        }
+
+        .loader-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark-pink);
+            letter-spacing: 1px;
+            animation: pulseText 1.2s infinite alternate;
+        }
+
+        @keyframes pulseText {
+            from { opacity: 0.6; }
+            to { opacity: 1; }
+        }
+
+        /* 🌸 المحتوى الرئيسي */
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(231, 84, 128, 0.12);
+            border: 2px dashed var(--primary-pink);
+            backdrop-filter: blur(5px);
+        }
+
+        .main-img {
+            width: 170px;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--dark-pink);
+            box-shadow: 0 8px 20px rgba(231, 84, 128, 0.25);
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--dark-pink);
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .motivational-quote {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #6b5270;
+            line-height: 1.7;
+        }
+
+        /* 🌸 شبكة الكروت الرئيسية */
+        .main-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .nav-card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.04);
+            border: 3px solid var(--primary-pink);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulse-border 3s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { border-color: #ffb6c1; box-shadow: 0 0 0 0 rgba(255, 182, 193, 0.4); }
+            50% { border-color: #e75480; box-shadow: 0 0 0 12px rgba(231, 84, 128, 0); }
+            100% { border-color: #ffb6c1; box-shadow: 0 0 0 0 rgba(255, 182, 193, 0); }
+        }
+
+        .nav-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(231, 84, 128, 0.25);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px dashed var(--soft-pink);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: var(--dark-pink);
+        }
+
+        .card-icons {
+            font-size: 1.6rem;
+            color: var(--dark-pink);
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-body-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #5a475c;
+            text-align: justify;
+        }
+
+        .card-body-text p {
+            margin-bottom: 15px;
+            position: relative;
+            padding-right: 15px;
+        }
+
+        .card-body-text p::before {
+            content: "•";
+            color: var(--dark-pink);
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            right: 0;
+            top: -2px;
+        }
+
+        .enter-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 22px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+            color: white;
+            font-weight: 700;
+            border-radius: 20px;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(231, 84, 128, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .nav-card:hover .enter-btn {
+            transform: translateX(-5px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🌸 شاشة التحميل -->
+    <div id="loader">
+        <div class="loader-avatar-container">
+            <img src="1000137195.jpg" alt="سارة" class="loader-avatar">
+            <!-- زهور تتساقط فوق الصورة -->
+            <div class="falling-flower" style="left: 10%; animation-duration: 2s;">🌸</div>
+            <div class="falling-flower" style="left: 40%; animation-duration: 1.5s;">🌺</div>
+            <div class="falling-flower" style="left: 70%; animation-duration: 2.2s;">🌸</div>
+            <div class="falling-flower" style="left: 85%; animation-duration: 1.8s;">🌷</div>
+        </div>
+        <div class="loader-text">أهلاً بكِ يا سارة... جاري فتح مرجعك اليومي ✨</div>
+    </div>
+
+    <!-- 🌸 المحتوى الرئيسي -->
+    <div class="container" id="mainContent">
+        <header>
+            <img src="1000137195.jpg" alt="سارة" class="main-img">
+            <h1>مرجعي اليومي ✨</h1>
+            <div class="motivational-quote">
+                "خطوة صغيرة كل يوم تصنع شيئاً عظيماً؛ توكلي على الله وابدئي يومك وهمتك تعانق السحاب!" 🌸
+            </div>
+        </header>
+
+        <div class="main-cards">
+            <!-- 🕋 كرت العبادات -->
+            <a href="worship.html" class="nav-card">
+                <div class="card-header">
+                    <div class="card-header-title">
+                        <i class="fa-solid fa-kaaba"></i> قسم العبادات والروحانيات
+                    </div>
+                    <div class="card-icons">
+                        <i class="fa-solid fa-book-quran" title="مصحف"></i>
+                        <i class="fa-solid fa-mosque" title="جامع"></i>
+                    </div>
+                </div>
+                <div class="card-body-text">
+                    <p>«اجعل بينك وبين الله حكاية لا تنقطع؛ صلاةٌ لا تتركها، وقرآنٌ لا تهجره، وذِكرٌ يطمئن قلبك، ودعاءٌ تلجأ به إليه في كل حين. فليس المهم أن تبدأ بقوة، بل أن تعود كلما ضعفت، وألّا تيأس من رحمة الله أبدًا». 🤍🕊️</p>
+                    <p>«🤍🌿 لا تؤجّل قربك من الله حتى تصبح أفضل، بل اقترب من الله حتى تصبح أفضل.»</p>
+                    <p>«حافظ على صلاتك، واجعل لك وردًا من القرآن، ولا تنسَ أذكارك؛ فالقلب الذي يتصل بالله لا يضيع، والطريق إلى الله يبدأ بخطوة، والثبات يحتاج مجاهدة كل يوم. اللهم أعنّي على ذكرك وشكرك وحسن عبادتك. 🌸»</p>
+                </div>
+                <div style="text-align: left;">
+                    <span class="enter-btn">اضغطي للدخول إلى جدول العبادات 👈</span>
+                </div>
+            </a>
+
+            <!-- 🔬 كرت المذاكرة -->
+            <a href="study.html" class="nav-card">
+                <div class="card-header">
+                    <div class="card-header-title">
+                        <i class="fa-solid fa-graduation-cap"></i> قسم المذاكرة والتحصيل
+                    </div>
+                    <div class="card-icons">
+                        <i class="fa-solid fa-microscope" title="ميكروسكوب"></i>
+                        <i class="fa-solid fa-virus" title="طفيليات"></i>
+                        <i class="fa-solid fa-user-doctor" title="بالطو"></i>
+                    </div>
+                </div>
+                <div class="card-body-text">
+                    <p><strong>رسالتك أكبر من الامتحان:</strong> «أنا مش بذاكر لمجرد إني أنجح، أنا بتعلم عشان أكون شخصًا أمينًا في علمه، نافعًا لغيره، وأقدر أؤدي مسؤوليتي في عملي بإتقان.» 🩷</p>
+                    <p><strong>وقت التعب والفتور:</strong> «مش لازم كل يوم تكون عندك طاقة كبيرة، لكن حاول تعمل حاجة صغيرة حتى في الأيام الصعبة. صفحة تفهمها أحسن من ساعات تقضيها وأنت محبط، والاستمرار أهم من الكمال.» 🌱</p>
+                    <p><strong>لما تقارن نفسك بغيرك:</strong> «متقارنش بدايتك بنهاية حد تاني، ومتخليش صعوبة مادة أو مصطلح إنجليزي تقنعك إنك مش شاطر. أنت لسه بتتعلم، ومن حقك تغلط وتسأل وتحاول لحد ما تفهم.» 💜</p>
+                </div>
+                <div style="text-align: left;">
+                    <span class="enter-btn">اضغطي للدخول إلى جدول المذاكرة 👈</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // إخفاء شاشة التحميل بعد ثانيتين وإظهار المحتوى
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                const mainContent = document.getElementById('mainContent');
+                
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+                
+                mainContent.classList.add('show');
+            }, 2200);
+        });
+    </script>
+</body>
+</html>

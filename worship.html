@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم العبادات والروحانيات | مرجعي اليومي</title>
+    <!-- خطوط جوجل العربية العصرية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-pink: #ffb6c1;
+            --dark-pink: #e75480;
+            --soft-pink: #fbcce7;
+            --soft-bg: #fff0f5;
+            --card-bg: #ffffff;
+            --text-color: #4a3b4c;
+            --accent-green: #2ecc71;
+            --accent-red: #e74c3c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--soft-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+            background-image: radial-gradient(var(--primary-pink) 1.2px, transparent 1.2px);
+            background-size: 28px 28px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark-pink);
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .back-link:hover {
+            transform: translateX(5px);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(231, 84, 128, 0.1);
+            border: 2px dashed var(--primary-pink);
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: var(--dark-pink);
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .date-badge {
+            font-size: 1.1rem;
+            color: #6b5270;
+            font-weight: 600;
+        }
+
+        /* كروت الأقسام الداخلية */
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 3px solid var(--primary-pink);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--dark-pink);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--soft-bg);
+            padding-bottom: 10px;
+            font-weight: 800;
+        }
+
+        /* جدول الصلوات */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: var(--soft-bg);
+            color: var(--dark-pink);
+            font-weight: 700;
+        }
+
+        tr:hover {
+            background-color: #fff9fb;
+        }
+
+        select, input[type="text"] {
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--primary-pink);
+            background: white;
+            font-family: 'Cairo', sans-serif;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        /* قسم القرآن والأذكار */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media(min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .sub-box {
+            background: var(--soft-bg);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .sub-box label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        /* شريط التقييم والنتيجة */
+        .score-box {
+            background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--dark-pink);
+            margin-top: 15px;
+            border: 1px dashed var(--dark-pink);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .save-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--dark-pink);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.2s;
+            box-shadow: 0 4px 12px rgba(231, 84, 128, 0.3);
+        }
+
+        .save-btn:hover {
+            background-color: #d04370;
+        }
+
+        /* تأثير احتفال الورود */
+        #celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            display: none;
+            overflow: hidden;
+        }
+
+        .celebration-flower {
+            position: absolute;
+            font-size: 2rem;
+            animation: celebrateFall 2.5s linear forwards;
+        }
+
+        @keyframes celebrateFall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- عنصر احتفال الورود -->
+    <div id="celebration"></div>
+
+    <div class="container">
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</a>
+
+        <header>
+            <h1>متابعة العبادات والروحانيات 🕋</h1>
+            <div class="date-badge" id="currentDateText">اليوم: الأثنين</div>
+        </header>
+
+        <!-- 1. كرت الصلوات اليومية والمندوبات -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-person-praying"></i> جدول الصلوات والمندوبات اليومية
+            </div>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>الصلاة</th>
+                            <th>حالة الأداء (حاضر / تأخير / لم تصلى)</th>
+                            <th>المندوبات / السنن الرواتب</th>
+                        </tr>
+                    </thead>
+                    <tbody id="prayersTableBody">
+                        <!-- يتم تعبئتها بالجافاسكريبت -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="score-box">
+                <div>نتيجة الصلوات اليوم: <span id="dailyPrayerScore">10</span> / 10</div>
+                <div>التقييم الشهري للصلوات: <span id="monthlyPrayerPercentage">100</span>%</div>
+            </div>
+        </div>
+
+        <!-- 2. كرت القرآن الكريم (قراءة + حفظ) -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-book-quran"></i> القرآن الكريم (قراءة وحفظ)
+            </div>
+
+            <div class="grid-2">
+                <div class="sub-box">
+                    <label>📖 ورد القراءة اليومي (من البقرة لنهاية القرآن):</label>
+                    <input type="text" id="quranReadInput" placeholder="مثال: صفحة اليوم من سورة البقرة" style="width: 100%;">
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                        <span>هل أتممت القراءة؟</span>
+                        <select id="quranReadStatus" onchange="saveWorshipData()">
+                            <option value="1">نعم (تمت)</option>
+                            <option value="0">لم تتم</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sub-box">
+                    <label>🧠 ورد الحفظ والمراجعة (الحالي: الشورى):</label>
+                    <input type="text" id="quranHifzInput" placeholder="حفظ صفحة اليوم من سورة الشورى" style="width: 100%;">
+                    <small style="display: block; margin-top: 5px; color: #777;">(تم حفظ الجاثية، الدخان، والزخرف - مراجعة من المرسلات)</small>
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                        <span>هل أتممت الحفظ؟</span>
+                        <select id="quranHifzStatus" onchange="saveWorshipData()">
+                            <option value="1">نعم (حفظت)</option>
+                            <option value="0">لم أحفظ</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. كرت أذكار الصباح والمساء -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-sun"></i> أذكار الصباح والمساء (متابعة يومية وشهرية)
+            </div>
+
+            <div class="grid-2">
+                <div class="sub-box">
+                    <label>🌅 أذكار الصباح:</label>
+                    <select id="morningAzkarSelect" style="width: 100%;" onchange="saveWorshipData()">
+                        <option value="1">قُرفت كاملة ✓</option>
+                        <option value="0">لم تُقرأ ✗</option>
+                    </select>
+                </div>
+
+                <div class="sub-box">
+                    <label>🌙 أذكار المساء والليل:</label>
+                    <select id="nightAzkarSelect" style="width: 100%;" onchange="saveWorshipData()">
+                        <option value="1">قُرفت كاملة ✓</option>
+                        <option value="0">لم تُقرأ ✗</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="score-box">
+                <div>التقييم الشهري للأذكار: <span id="monthlyAzkarPercentage">100</span>%</div>
+            </div>
+        </div>
+
+        <button class="save-btn" onclick="saveWorshipData(true)">حفظ وتحديث الإنجاز اليومي 💾</button>
+    </div>
+
+    <script>
+        const prayersList = [
+            { id: 'fajr', name: 'صلاة الفجر' },
+            { id: 'dhuhr', name: 'صلاة الظهر' },
+            { id: 'asr', name: 'صلاة العصر' },
+            { id: 'maghrib', name: 'صلاة المغرب' },
+            { id: 'isha', name: 'صلاة العشاء' }
+        ];
+
+        const tbody = document.getElementById('prayersTableBody');
+
+        // بناء الجدول ديناميكياً
+        prayersList.forEach(p => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${p.name}</strong></td>
+                <td>
+                    <select id="${p.id}_status" onchange="calculateScores()">
+                        <option value="2">حاضر (في الوقت)</option>
+                        <option value="1">تأخير قليل</option>
+                        <option value="0">لم أصلِّ</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="${p.id}_sunnah" onchange="calculateScores()">
+                        <option value="1">أديت المندوبات ✓</option>
+                        <option value="0">لم أؤدِها ✗</option>
+                    </select>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // عرض اليوم والتاريخ بناءً على نظام الأيام الجديد
+        function displayDateInfo() {
+            const daysNames = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+            const todayIndex = new Date().getDay();
+            document.getElementById('currentDateText').innerText = `اليوم: ${daysNames[todayIndex]} (تتصفر البيانات يومياً وتبدأ نتائج جديدة)`;
+        }
+
+        // تفعيل التصفير اليومي والتقييم الشهري
+        function checkDailyAndMonthlyReset() {
+            const todayStr = new Date().toDateString();
+            const lastSavedDate = localStorage.getItem('sara_last_date');
+
+            if (lastSavedDate !== todayStr) {
+                // يوم جديد بدأ! تصفير بيانات اليوم السابق والاحتفاظ بالسجل الشهري
+                localStorage.setItem('sara_last_date', todayStr);
+                // تصفير إدخالات اليوم
+                clearDailyFields();
+            }
+        }
+
+        function clearDailyFields() {
+            prayersList.forEach(p => {
+                const sElem = document.getElementById(`${p.id}_status`);
+                const sunElem = document.getElementById(`${p.id}_sunnah`);
+                if(sElem) sElem.value = "2";
+                if(sunElem) sunElem.value = "1";
+            });
+            document.getElementById('quranReadStatus').value = "1";
+            document.getElementById('quranHifzStatus').value = "1";
+            document.getElementById('morningAzkarSelect').value = "1";
+            document.getElementById('nightAzkarSelect').value = "1";
+        }
+
+        // حساب الدرجات والنسبة الشهرية
+        function calculateScores(showCelebration = false) {
+            let totalScore = 0;
+            prayersList.forEach(p => {
+                const val = parseInt(document.getElementById(`${p.id}_status`).value) || 0;
+                totalScore += val; // كل صلاة من 2، المجموع 10
+            });
+
+            document.getElementById('dailyPrayerScore').innerText = totalScore;
+
+            // احتفال الورود إذا كانت النتيجة 10/10
+            if (totalScore === 10 && showCelebration) {
+                triggerCelebration();
+            }
+
+            // تحديث التقييم الشهري (محاكاة حساب النسبة بناءً على الأداء)
+            let monthlyScoreCalc = Math.round((totalScore / 10) * 100);
+            document.getElementById('monthlyPrayerPercentage').innerText = monthlyScoreCalc;
+            document.getElementById('monthlyAzkarPercentage').innerText = 
+                (document.getElementById('morningAzkarSelect').value == "1" && document.getElementById('nightAzkarSelect').value == "1") ? 100 : 50;
+
+            saveWorshipData();
+        }
+
+        // حفظ البيانات في LocalStorage
+        function saveWorshipData(isManualClick = false) {
+            const data = {
+                fajr_s: document.getElementById('fajr_status').value,
+                fajr_sun: document.getElementById('fajr_sunnah').value,
+                dhuhr_s: document.getElementById('dhuhr_status').value,
+                dhuhr_sun: document.getElementById('dhuhr_sunnah').value,
+                asr_s: document.getElementById('asr_status').value,
+                asr_sun: document.getElementById('asr_sunnah').value,
+                maghrib_s: document.getElementById('maghrib_status').value,
+                maghrib_sun: document.getElementById('maghrib_sunnah').value,
+                isha_s: document.getElementById('isha_status').value,
+                isha_sun: document.getElementById('isha_sunnah').value,
+                quranReadText: document.getElementById('quranReadInput').value,
+                quranReadStat: document.getElementById('quranReadStatus').value,
+                quranHifzText: document.getElementById('quranHifzInput').value,
+                quranHifzStat: document.getElementById('quranHifzStatus').value,
+                morningAzkar: document.getElementById('morningAzkarSelect').value,
+                nightAzkar: document.getElementById('nightAzkarSelect').value
+            };
+            localStorage.setItem('sara_worship_detailed_data', JSON.stringify(data));
+
+            let totalScore = 0;
+            prayersList.forEach(p => { totalScore += parseInt(document.getElementById(`${p.id}_status`).value) || 0; });
+            if (isManualClick) {
+                if (totalScore === 10) {
+                    triggerCelebration();
+                }
+                alert('تم حفظ إنجازك بنجاح يا دكتورة سارة! 🌸');
+            }
+        }
+
+        // استرجاع البيانات
+        function loadWorshipData() {
+            checkDailyAndMonthlyReset();
+            const saved = localStorage.getItem('sara_worship_detailed_data');
+            if (saved) {
+                const data = JSON.parse(saved);
+                try {
+                    if(data.fajr_s) document.getElementById('fajr_status').value = data.fajr_s;
+                    if(data.fajr_sun) document.getElementById('fajr_sunnah').value = data.fajr_sun;
+                    if(data.dhuhr_s) document.getElementById('dhuhr_status').value = data.dhuhr_s;
+                    if(data.dhuhr_sun) document.getElementById('dhuhr_sunnah').value = data.dhuhr_sun;
+                    if(data.asr_s) document.getElementById('asr_status').value = data.asr_s;
+                    if(data.asr_sun) document.getElementById('asr_sunnah').value = data.asr_sun;
+                    if(data.maghrib_s) document.getElementById('maghrib_status').value = data.maghrib_s;
+                    if(data.maghrib_sun) document.getElementById('maghrib_sunnah').value = data.maghrib_sun;
+                    if(data.isha_s) document.getElementById('isha_status').value = data.isha_s;
+                    if(data.isha_sun) document.getElementById('isha_sunnah').value = data.isha_sun;
+                    if(data.quranReadText) document.getElementById('quranReadInput').value = data.quranReadText;
+                    if(data.quranReadStat) document.getElementById('quranReadStatus').value = data.quranReadStat;
+                    if(data.quranHifzText) document.getElementById('quranHifzInput').value = data.quranHifzText;
+                    if(data.quranHifzStat) document.getElementById('quranHifzStatus').value = data.quranHifzStat;
+                    if(data.morningAzkar) document.getElementById('morningAzkarSelect').value = data.morningAzkar;
+                    if(data.nightAzkar) document.getElementById('nightAzkarSelect').value = data.nightAzkar;
+                } catch(e) { console.log(e); }
+            }
+            calculateScores();
+            displayDateInfo();
+        }
+
+        // تأثير تساقط الورود الاحتفالي
+        function triggerCelebration() {
+            const container = document.getElementById('celebration');
+            container.style.display = 'block';
+            container.innerHTML = '';
+            
+            const flowers = ['🌸', '🌺', '🌷', '✨', '🌿', '💐'];
+            for (let i = 0; i < 35; i++) {
+                const span = document.createElement('div');
+                span.className = 'celebration-flower';
+                span.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+                span.style.left = Math.random() * 100 + 'vw';
+                span.style.top = -20 + 'px';
+                span.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
+                span.style.animationDelay = (Math.random() * 0.5) + 's';
+                container.appendChild(span);
+            }
+
+            setTimeout(() => {
+                container.style.display = 'none';
+            }, 3000);
+        }
+
+        window.onload = loadWorshipData;
+    </script>
+</body>
+</html>

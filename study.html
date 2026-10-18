@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قسم المذاكرة والتحصيل | مرجعي اليومي</title>
+    <!-- خطوط جوجل العربية العصرية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة الأيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-pink: #ffb6c1;
+            --dark-pink: #e75480;
+            --soft-pink: #fbcce7;
+            --soft-bg: #fff0f5;
+            --card-bg: #ffffff;
+            --text-color: #4a3b4c;
+            --accent-green: #2ecc71;
+            --accent-red: #e74c3c;
+            --accent-yellow: #f39c12;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--soft-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+            background-image: radial-gradient(var(--primary-pink) 1.2px, transparent 1.2px);
+            background-size: 28px 28px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark-pink);
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .back-link:hover {
+            transform: translateX(5px);
+        }
+
+        /* رأس الصفحة والعبارات التحضيرية */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(231, 84, 128, 0.12);
+            border: 2px dashed var(--primary-pink);
+        }
+
+        h1 {
+            font-size: 2.1rem;
+            color: var(--dark-pink);
+            font-weight: 900;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .intro-quotes {
+            font-size: 1.05rem;
+            color: #5a475c;
+            line-height: 1.8;
+            text-align: justify;
+            background: var(--soft-bg);
+            padding: 18px;
+            border-radius: 15px;
+            border-right: 4px solid var(--dark-pink);
+            margin-top: 15px;
+        }
+
+        .intro-quotes p {
+            margin-bottom: 10px;
+        }
+
+        .intro-quotes p:last-child {
+            margin-bottom: 0;
+            font-weight: 700;
+            color: var(--dark-pink);
+        }
+
+        /* كرت المواد والتقييم */
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 3px solid var(--primary-pink);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--dark-pink);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid var(--soft-bg);
+            padding-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 14px 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: var(--soft-bg);
+            color: var(--dark-pink);
+            font-weight: 700;
+        }
+
+        tr:hover {
+            background-color: #fff9fb;
+        }
+
+        select {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--primary-pink);
+            background: white;
+            font-family: 'Cairo', sans-serif;
+            color: var(--text-color);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* شريط التقييم العام */
+        .score-box {
+            background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+            padding: 18px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--dark-pink);
+            margin-top: 20px;
+            border: 1px dashed var(--dark-pink);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .save-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--dark-pink);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(231, 84, 128, 0.3);
+        }
+
+        .save-btn:hover {
+            background-color: #d04370;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-right"></i> العودة للرئيسية</a>
+
+        <header>
+            <h1><i class="fa-solid fa-microscope"></i> قسم المذاكرة والتحصيل الأكاديمي</h1>
+            
+            <div class="intro-quotes">
+                <p>«وراء كل عينة حكاية، ووراء كل نتيجة مسؤولية، وعشان كده لازم يكون علمي أمانة قبل ما يكون مهنة.» 🤍</p>
+                <p>«أنا بتعلم النهارده عشان بكرة أكون فني تحاليل فاهم شغله، دقيق في نتيجته، وأمين في مسؤوليته.» 🥼</p>
+                <p>«المجهر اللي بتعلم أستخدمه النهارده، والمعلومة اللي بحاول أفهمها، ممكن يكونوا جزءًا من رحلة تشخيص مريض بكرة.» 🔬</p>
+                <p>«مش عيب إني لسه مش بعرف كل حاجة؛ العيب إني أستسلم وأبطل أحاول أتعلم.» 🌱</p>
+                <p>«يا رب بارك لي في وقتي، وافتح عليّ في فهمي، واجعل علمي نافعًا، وارزقني الإخلاص والإتقان.» 🤲✨</p>
+            </div>
+        </header>
+
+        <!-- جدول مواد قسم بيولوجي ومتابعة المتراكم -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="fa-solid fa-list-check"></i> جدول مواد المعهد والمتابعة الأسبوعية
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المادة الدراسية</th>
+                            <th>الأقسام (عملي / نظري)</th>
+                            <th>موعد المحاضرة / السكشن</th>
+                            <th>حالة المتراكم قبل موعدها</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studyTableBody">
+                        <!-- يتم تعبئتها ديناميكياً عبر الجافاسكريبت للمواد المحددة -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="score-box">
+                <div>مستوى الانتظام وخلو المتراكم: <span id="studyScoreText">100</span>%</div>
+                <div id="motivationalStatusText" style="font-size: 1rem; color: #6b5270;">ممتاز! لا يوجد أي تراكم، همتك عالية يا دكتورة سارة ✨</div>
+            </div>
+        </div>
+
+        <button class="save-btn" onclick="saveStudyData(true)">حفظ حالة المذاكرة وتحديث التقييم 💾</button>
+    </div>
+
+    <script>
+        // المواد التي حددتِها بمواعيدها بدقة
+        const studySubjects = [
+            { id: 'hematology', name: 'هيماتولوجي', type: 'عملي ونظري', day: 'الأربعاء' },
+            { id: 'para', name: 'باراسيتولوجي (بارا)', type: 'عملي (الأربعاء) ونظري (السبت)', day: 'السبت / الأربعاء' },
+            { id: 'clinical_chem', name: 'كيمياء إكلينيكية', type: 'عملي ونظري', day: 'الأحد' },
+            { id: 'quality', name: 'الجودة والسلامة', type: 'نظري', day: 'الثلاثاء' },
+            { id: 'communication', name: 'التواصل', type: 'نظري', day: 'السبت' }
+        ];
+
+        const tbody = document.getElementById('studyTableBody');
+
+        studySubjects.forEach(sub => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${sub.name}</strong></td>
+                <td><span style="background: var(--soft-bg); padding: 4px 10px; border-radius: 8px; font-size: 0.9rem;">${sub.type}</span></td>
+                <td style="color: var(--dark-pink); font-weight: 700;">${sub.day}</td>
+                <td>
+                    <select id="sub_${sub.id}" onchange="calculateStudyScore()">
+                        <option value="0">✅ مخلص أول بأول (لا يوجد متراكم)</option>
+                        <option value="1">⚠️ لدي بعض المتراكم المتأخر</option>
+                        <option value="2">❌ تراكم كبير لم أذاكره قبل السكشن/المحاضرة</option>
+                    </select>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+        // حساب التقييم وتحديث النسبة (بدون تصفير شهري، تراكمي ومستمر)
+        function calculateStudyScore() {
+            let penaltyPoints = 0;
+            studySubjects.forEach(sub => {
+                const val = parseInt(document.getElementById(`sub_${sub.id}`).value) || 0;
+                penaltyPoints += val * 15; // خصم درجات حسب حجم المتراكم
+            });
+
+            let finalScore = Math.max(0, 100 - penaltyPoints);
+            document.getElementById('studyScoreText').innerText = finalScore;
+
+            const statusText = document.getElementById('motivationalStatusText');
+            if (finalScore >= 90) {
+                statusText.innerText = "رائعة يا دكتورة سارة! جدولك نظيف ومستدامة في الإنجاز 🌸";
+                statusText.style.color = "var(--accent-green)";
+            } else if (finalScore >= 60) {
+                statusText.innerText = "انتبهي! لديكِ بعض المتراكمات، شدّي حيلك قبل موعد المحاضرة القادمة 💪";
+                statusText.style.color = "var(--accent-yellow)";
+            } else {
+                statusText.innerText = "تنبيه هام! تراكمت عليكِ المواد، قومي بإنهاء الدروس فوراً لتستعيقي تفوقك ⚠️";
+                statusText.style.color = "var(--accent-red)";
+            }
+
+            saveStudyData(false);
+        }
+
+        // حفظ بيانات المذاكرة في LocalStorage (مستمرة ولا تتصفر شهرياً بناءً على طلبك)
+        function saveStudyData(isManualClick = false) {
+            const data = {};
+            studySubjects.forEach(sub => {
+                data[sub.id] = document.getElementById(`sub_${sub.id}`).value;
+            });
+            localStorage.setItem('sara_study_accumulated_data', JSON.stringify(data));
+
+            if (isManualClick) {
+                alert('تم حفظ جدول المذاكرة وتحديث تقييمك بنجاح يا دكتورة سارة! بالتوفيق دائماً 🎓✨');
+            }
+        }
+
+        // استرجاع البيانات المحفوظة عند فتح الصفحة
+        function loadStudyData() {
+            const saved = localStorage.getItem('sara_study_accumulated_data');
+            if (saved) {
+                const data = JSON.parse(saved);
+                studySubjects.forEach(sub => {
+                    if (data[sub.id] !== undefined) {
+                        document.getElementById(`sub_${sub.id}`).value = data[sub.id];
+                    }
+                });
+            }
+            calculateStudyScore();
+        }
+
+        window.onload = loadStudyData;
+    </script>
+</body>
+</html>
